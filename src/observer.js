@@ -195,7 +195,9 @@ goog.scope(function () {
             var now = that.getTime();
 
             if (now - start >= timeoutValue) {
-              reject();
+              reject(
+                  console.log('promise error has occurred due to timeout: ', that)
+              );
             } else {
               document.fonts.load(that.getStyle('"' + that['family'] + '"'), testString).then(function (fonts) {
                 if (fonts.length >= 1) {
@@ -204,7 +206,9 @@ goog.scope(function () {
                   setTimeout(check, 25);
                 }
               }, function () {
-                reject();
+                reject(
+                    console.log('promise error on document.fonts.load: ', that)
+                );
               });
             }
           };
